@@ -8,8 +8,13 @@
   display: flex;
 }
 
+.space-between{
+  justify-content: space-between;
+}
 
-
+.scroll{
+  overflow-x: scroll;
+}
 
 
 
