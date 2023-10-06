@@ -1,7 +1,8 @@
+
 import styled from "styled-components";
 
-const Button = styled.button`
-  width: 61px;
+const StyledButton = styled.button`
+  width: fit-content;
   height: 21px;
   background-color: white;
   color: #aaa9b1;
@@ -9,10 +10,10 @@ const Button = styled.button`
   border-color: #aaa9b1;
   border-radius: 25px;
   font-size: 10px;
-`
+`;
 
-const SeeMoreButton = () => {
-  return <Button>See more</Button>;
+const Button = (props) => {
+  return <StyledButton>{props.title}</StyledButton>;
 };
 
-export default SeeMoreButton;
+export default Button;

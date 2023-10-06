@@ -1,19 +1,19 @@
+
 import styled from "styled-components";
-import {FaStar} from "react-icons/fa"
+import { FaStar } from "react-icons/fa";
 
 const StyledFaStar = styled(FaStar)`
-color: #ffc319;
-`
+  color: #ffc319;
+`;
 const StyledP = styled.p`
-color: #9c9c9c;
-margin-left: 4px;
-`
-
+  color: #9c9c9c;
+  margin-left: 4px;
+`;
 const StyledDiv = styled.div`
-display: flex;
-`
+  display: flex;
+`;
 
-const MovieRating = () => {
+const Rating = () => {
   return (
     <StyledDiv>
       <StyledFaStar />
@@ -22,4 +22,4 @@ const MovieRating = () => {
   );
 };
 
-export default MovieRating;
+export default Rating;
