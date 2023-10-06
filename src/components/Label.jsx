@@ -11,7 +11,7 @@ const StyledSpan = styled.span`
 `;
 
 const Label = (props) => {
-  return <StyledSpan>{props.title}</StyledSpan>;
+  return <StyledSpan className="dark:bg-black dark:text-white dark:border-solid dark:border-[1px] dark:border-white dark:rounded-3xl">{props.title}</StyledSpan>;
 };
 
 export default Label;

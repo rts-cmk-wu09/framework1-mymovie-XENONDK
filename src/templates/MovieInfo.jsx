@@ -1,17 +1,16 @@
 import styled from "styled-components";
-import { FaRegBookmark } from "react-icons/fa";
+
 import Heading from "../components/Heading";
 import Rating from "../components/Rating";
 import Label from "../components/Label";
+import Bookmark from "../components/Bookmark";
 
 const StyledSection = styled.section`
   display: flex;
   flex-direction: column;
   gap: 12px;
 `;
-const StyledFaRegBookmark = styled(FaRegBookmark)`
-  align-self: center;
-`;
+
 const StyledGridSection = styled.section`
   display: grid;
   grid-template-columns: 25vw 25vw 25vw;
@@ -26,14 +25,14 @@ const StyledP = styled.p`
   font-size: 12px;
 `;
 
-const MovieInfo = () => {
+const MovieInfo = ({ data }) => {
   return (
-    <StyledSection>
+    <StyledSection className="dark:text-white">
       <div className="flexContainer justify-space-between">
-        <Heading title="Spiderman: No Way Home" size="20" as="h1" />
-        <StyledFaRegBookmark />
+        <Heading title={data.title} size="20" as="h1" />
+        <Bookmark />
       </div>
-      <Rating />
+      <Rating voteAverage={data.vote_average} />
       <StyledFlexSection>
         <Label title="action" />
         <Label title="action" />
@@ -42,10 +41,10 @@ const MovieInfo = () => {
       <StyledGridSection>
         <Heading title="Length" size="12" as="h4" />
         <Heading title="Langauge" size="12" as="h4" />
-        <Heading title="Rating" size="12" as="h4" />
-        <StyledP>Length4</StyledP>
-        <StyledP>Length4</StyledP>
-        <StyledP>Length4</StyledP>
+        <Heading title="Vote counts" size="12" as="h4" />
+        <StyledP>{data.runtime} min.</StyledP>
+        <StyledP>{data.original_language}</StyledP>
+        <StyledP>{data.vote_count}</StyledP>
       </StyledGridSection>
     </StyledSection>
   );

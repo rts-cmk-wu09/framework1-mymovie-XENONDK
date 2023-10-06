@@ -11,11 +11,12 @@ const StyledImg = styled.img`
       css`
         object-fit: cover;
       `)}
+
   width: ${(props) => props.width}px;
   height: ${(props) => props.height}px;
   border-radius: 10px;
 `;
 const Image = (props) => {
-  return <StyledImg {...props} />;
+  return <StyledImg className="dark:shadow-[5px_5px_5px] dark:shadow-[rgba(255,255,255,0.35)]" {...props} />;
 };
 export default Image;

@@ -1,4 +1,3 @@
-
 import styled from "styled-components";
 
 const StyledButton = styled.button`
@@ -13,7 +12,7 @@ const StyledButton = styled.button`
 `;
 
 const Button = (props) => {
-  return <StyledButton>{props.title}</StyledButton>;
+  return <StyledButton className="dark:bg-black dark:text-white">{props.title}</StyledButton>;
 };
 
 export default Button;

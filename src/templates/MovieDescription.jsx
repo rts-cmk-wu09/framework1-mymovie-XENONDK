@@ -1,4 +1,3 @@
-
 import styled from "styled-components";
 import Heading from "../components/Heading";
 
@@ -8,14 +7,12 @@ const StyledP = styled.p`
   margin-top: 8px;
 `;
 
-const MovieDescription = () => {
+const MovieDescription = ({data}) => {
   return (
     <article>
       <Heading title="Description" size="16" as="h2" />
       <StyledP>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus ad
-        odio maiores consectetur ducimus. Animi, quis saepe. Quibusdam nulla,
-        eligendi et atque ad dolore adipisci.
+        {data.overview}
       </StyledP>
     </article>
   );
