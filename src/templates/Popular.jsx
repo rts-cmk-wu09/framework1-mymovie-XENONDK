@@ -5,6 +5,8 @@ import Image from "../components/Image";
 import Label from "../components/Label";
 import Release from "../components/Realease";
 import { Link, useLoaderData } from "react-router-dom";
+import { useGenre } from "../hooks/useGenere";
+
 
 const StyledArticle = styled.article`
   display: flex;
@@ -22,6 +24,7 @@ const StyledDiv = styled.div`
 
 const Popular = () => {
   const MovieData = useLoaderData();
+  const genresData = useGenre();
 
   return (
     <>
@@ -37,9 +40,15 @@ const Popular = () => {
               <Heading title={data.title} size="14" as="h3" />
               <Rating voteAverage={data.vote_average} />
               <StyledDiv>
-                <Label title="horror" />
-                <Label title="thriller" />
-                <Label title="documentary" />
+                {genresData &&
+                  data.genre_ids.map((genreid) =>
+                    genresData.genres.map((id) => 
+                      genreid == id.id && 
+                          <Label title={id.name} key={id.id} />
+                        
+                      
+                    )
+                  )}
               </StyledDiv>
               <Release date={data.release_date} />
             </StyledSection>

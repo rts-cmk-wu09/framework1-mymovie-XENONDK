@@ -1,59 +1,57 @@
-import { FaRegBookmark, FaBookmark } from "react-icons/fa";
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { useFavorite } from "../hooks/useFavorite";
-import axios from "axios";
+ import { FaRegBookmark, FaBookmark } from "react-icons/fa";
+ import { useState, useEffect } from "react";
+ import { useParams } from "react-router-dom";
+ import { useFavorite } from "../hooks/useFavorite";
 
 
-const Bookmark = () => {
-  let { id } = useParams(false);
-  const [render, setRender] = useState(false)
-  const [marked, setMarked] = useState(undefined);
+
+ const Bookmark = () => {
+   let { id } = useParams(false);
+   const favorite = useFavorite(parseInt(id))
+   const [marked, setMarked] = useState(undefined);
   
   
+   useEffect(() => {
+     favorite && setMarked(favorite)
+   },[favorite])
+   const [render, setRender] = useState(false)
 
-  useEffect(() => {
-    marked && setMarked(marked)
-  },[marked])
-
-  useEffect(() => {
-    if (render) {
-        const options = {
-            method: "POST",
-            url: "https://api.themoviedb.org/3/account/19377357/favorite",
-            headers: {
-              accept: "application/json",
-              "content-type": "application/json",
-              Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ZTY5ZjNiZGY4ZTAzYTNmNTgwMjc3MjQwN2ZhZGU5NSIsInN1YiI6IjY0NTg5OWMwNmM4NDkyMDBlMzVkODAyMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.MuQ4fd3LaUZhSA-AIoWZnVQ9AU192ira98sLhNoHIq8",
-            },
-            data: { media_type: "movie", media_id: id, favorite: marked },
-          };
+ useEffect(() => {
+   if (render) {
+    const options = {
+        method: 'POST',
+        headers: {
+          accept: 'application/json',
+          'content-type': 'application/json',
+          Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_TOKEN}`
+        },
+        body: JSON.stringify({media_type: 'movie', media_id: id, favorite: marked})
+      };
       
-          axios
-            .request(options)
-            .then(function (response) {
-              console.log(response.data);
-            })
-            .catch(function (error) {
-              console.error(error);
-            });
-    }
+      fetch('https://api.themoviedb.org/3/account/19377357/favorite', options)
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(err => console.error(err));
+         }
+
+
+ setRender(true)
+ }, [marked]) 
+
     
-    setRender(true)
       
-  }, [marked]);
+  
 
  
-  return (
-    <span
-      onClick={() => {
-        setMarked(!marked);
-      }}
-    >
-      {marked ? <FaBookmark /> : <FaRegBookmark />}
-    </span>
-  );
-};
+   return (
+     <span
+       onClick={() => {
+         setMarked(!marked);
+       }}
+     >
+       {marked ? <FaBookmark /> : <FaRegBookmark />}
+     </span>
+   );
+ };
 
-export default Bookmark;
+ export default Bookmark;

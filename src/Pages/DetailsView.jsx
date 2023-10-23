@@ -81,10 +81,10 @@ const DetailsView = () => {
 export const DetailsViewData = async ({ params }) => {
   return Promise.allSettled([
     axios(
-      `http://api.themoviedb.org/3/movie/${params.id}?api_key=7e69f3bdf8e03a3f5802772407fade95&append_to_response=videos`
+      `http://api.themoviedb.org/3/movie/${params.id}?api_key=${import.meta.env.VITE_TMDB_API_KEY}&append_to_response=videos`
     ),
     axios(
-      `http://api.themoviedb.org/3/movie/${params.id}/credits?api_key=7e69f3bdf8e03a3f5802772407fade95`
+      `http://api.themoviedb.org/3/movie/${params.id}/credits?api_key=${import.meta.env.VITE_TMDB_API_KEY}`
     ),
   ]).then((data) => {
     return {

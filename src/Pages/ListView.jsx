@@ -1,3 +1,4 @@
+
 import NowShowing from "../templates/NowShowing";
 import Button from "../components/Button";
 import Heading from "../components/Heading";
@@ -44,17 +45,18 @@ const ListView = () => {
 export const ListViewData = async () => {
   return await Promise.allSettled([
     axios(
-      `https://api.themoviedb.org/3/movie/now_playing/?api_key=7e69f3bdf8e03a3f5802772407fade95`
+      `https://api.themoviedb.org/3/movie/now_playing/?api_key=${import.meta.env.VITE_TMDB_API_KEY}`
     ),
     axios(
-      `https://api.themoviedb.org/3/movie/popular/?api_key=7e69f3bdf8e03a3f5802772407fade95`
+      `https://api.themoviedb.org/3/movie/popular/?api_key=${import.meta.env.VITE_TMDB_API_KEY}`
     ),
   ]).then((data) => {
     return {
       nowShowing: data[0].value.data.results,
       popular: data[1].value.data.results,
     };
-  });
+  })
+
 };
 
 export default ListView;

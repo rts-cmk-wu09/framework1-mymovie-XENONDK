@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import DetailsView from "./pages/DetailsView";
@@ -12,7 +12,8 @@ import {
 } from "react-router-dom";
 import { ListViewData } from "./pages/ListView";
 import { DetailsViewData } from "./pages/DetailsView";
-import Bookmarks from "./pages/Bookmarks";
+
+const LazyBookmarks = lazy(() => import("./pages/Bookmarks"));
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,7 +24,14 @@ const router = createBrowserRouter(
         loader={DetailsViewData}
         element={<DetailsView />}
       />
-      <Route path="/bookmarks" element={<Bookmarks />} />
+      <Route
+        path="/bookmarks"
+        element={
+          <Suspense fallback={<div>Loading data, pls hold on</div>}>
+            <LazyBookmarks />
+          </Suspense>
+        }
+      />
     </Route>
   )
 );
